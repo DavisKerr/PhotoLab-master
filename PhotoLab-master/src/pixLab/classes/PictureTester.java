@@ -44,6 +44,10 @@ public class PictureTester
 	  beach.keepOnlyGreen();
 	  beach.explore();
   }
+  public static void testMirrorVerticleRightToLeft()
+  {
+	  Picture caterpillar = new Picture("caterpillar.jpg");
+  }
   
   public static void testNegate()
   {
@@ -118,7 +122,7 @@ public class PictureTester
     //testGrayscale(); //done
     //testFixUnderwater(); //done?
     //testMirrorVertical(); //done
-    //testMirrorTemple();
+    //testMirrorTemple(); //done
     //testMirrorArms();
     //testMirrorGull();
     //testMirrorDiagonal();
