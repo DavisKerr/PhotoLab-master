@@ -9,6 +9,16 @@ package pixLab.classes;
  */
 public class PictureTester
 {
+	public static void fiveAlgorithms()
+	{
+		Picture bike = new Picture("bike.jpg");
+		bike.zeroBlue();
+		bike.negate();
+		bike.mirrorDiagonalDownward();
+		bike.randomChange();
+		bike.explore();
+	}
+	
   /** Method to test zeroBlue */
   public static void testZeroBlue()
   {
@@ -47,6 +57,17 @@ public class PictureTester
   public static void testMirrorVerticleRightToLeft()
   {
 	  Picture caterpillar = new Picture("caterpillar.jpg");
+	  caterpillar.explore();
+	  caterpillar.mirrorVerticleRightToLeft();
+	  caterpillar.explore();
+  }
+  
+  public static void testMirrorHorizontal()
+  {
+	  Picture fellowship = new Picture("caterpillar.jpg");
+	  fellowship.explore();
+	  fellowship.mirrorHorizontal();
+	  fellowship.explore();
   }
   
   public static void testNegate()
@@ -107,10 +128,62 @@ public class PictureTester
     swan.explore();
   }
   
+  public static void testMirrorDiagonal()
+  {
+	  Picture beach = new Picture("beach.jpg");
+	  beach.explore();
+	  beach.mirrorDiagonal();
+	  beach.explore();
+  }
+  public static void testSepiaTone()
+  {
+	  Picture beach = new Picture("beach.jpg");
+	  beach.explore();
+	  beach.sepiaTone();
+	  beach.explore();
+  }
+  
+  public static void testMirrorGull()
+  {
+	  Picture gull = new Picture("seagull.jpg");
+	  gull.explore();
+	  gull.mirrorGull();
+	  gull.explore();
+  }
+  
+  public static void testMirrorArms()
+  {
+	  Picture snow = new Picture("snowman.jpg");
+	  snow.explore();
+	  snow.mirrorArms();
+	  snow.explore();
+  }
+  public static void testRandomChange()
+  {
+	  Picture beach = new Picture("beach.jpg");
+	  beach.explore();
+	  beach.randomChange();
+	  beach.explore();
+  }
+  public static void testCopy()
+  {
+	  
+  }
+  
+  public static void testOrder()
+  {
+	  Picture beach = new Picture("beach.jpg");
+	  beach.explore();
+	  beach.order();
+	  beach.explore();
+  }
+  
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
   {
+	fiveAlgorithms();
+	//testOrder(); 
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
@@ -122,12 +195,14 @@ public class PictureTester
     //testGrayscale(); //done
     //testFixUnderwater(); //done?
     //testMirrorVertical(); //done
+	//testMirrorVerticleRightToLeft(); //done
     //testMirrorTemple(); //done
-    //testMirrorArms();
-    //testMirrorGull();
-    //testMirrorDiagonal();
+	//testMirrorHorizontal();//done
+    //testMirrorArms();//done
+    //testMirrorGull(); //done
+    //testMirrorDiagonal(); //done
     //testCollage();
-    //testCopy();
+    //testCopy(); //working on
     //testEdgeDetection(); //done
     //testEdgeDetection2();
     //testChromakey();
@@ -136,5 +211,7 @@ public class PictureTester
     //testSetRedToHalfValueInTopHalf();
     //testClearBlueOverValue(200);
     //testGetAverageForColumn(0);
+	//testSepiaTone(); //done
+	//testRandomChange(); //done
   }
 }
