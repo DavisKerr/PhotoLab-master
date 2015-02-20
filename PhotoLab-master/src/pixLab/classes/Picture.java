@@ -99,6 +99,32 @@ public class Picture extends SimplePicture
     }
   }
   
+  public void chromakey(Picture greenScreen)
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  Pixel[][] greenPixels = greenScreen.getPixels2D();
+	    Pixel samePixel = null;
+	    Pixel greenPixel = null;
+	    int width = pixels[0].length;
+	     for(int row = 0; row < greenPixels.length; row++)
+	     {
+	    	 for(int col = 0; col < greenPixels[0].length; col++)
+	    	 {
+	    		 samePixel = pixels[row][col];
+	    		 greenPixel = greenPixels[row][col];
+	    		 
+	    		 if(greenPixel.getGreen() < 100)
+	    		 {
+	    			 samePixel.setColor(greenPixel.getColor());
+	    		 }
+	    		 else
+	    		 {
+	    			 
+	    		 }
+	    	 }
+	     }
+  }
+  
   public void sepiaTone()
   {
 	  Pixel[][] imageMatrix = this.getPixels2D();
@@ -157,18 +183,20 @@ public class Picture extends SimplePicture
   }
   
   
-  public void copy2(Picture fromPic, int startRow, int startCol)
+  public void copy2(Picture fromPic, int startRow, int startCol, int endCol, int endRow)
   {
 	  Pixel fromPixel = null;
 	  Pixel toPixel = null;
 	  Pixel[][] toPixels = this.getPixels2D();
 	  Pixel[][] fromPixels = fromPic.getPixels2D();
 	  
-	  for(int fromRow = 0, toRow = startRow; fromRow < fromPixels.length && toRow < toPixels.length; fromRow++, toRow++)
+	  for(int fromRow = 0, toRow = startRow; fromRow < fromPixels.length && toRow < toPixels.length && fromRow < endRow && toRow < endRow; fromRow++, toRow++)
 	  {
-		  for(int fromCol = 0, toCol = startCol; fromCol < fromPixels[0].length && toRow < toPixels[0].length; fromCol++, toCol++)
+		  for(int fromCol = 0, toCol = startCol; fromCol < fromPixels[0].length && toRow < toPixels[0].length && fromCol < endCol && toCol < endRow; fromCol++, toCol++)
 		  {
-			  
+			  	fromPixel = fromPixels[fromRow][fromCol];
+		        toPixel = toPixels[toRow][toCol];
+		        toPixel.setColor(fromPixel.getColor());
 		  }
 	  }
   }
@@ -450,25 +478,61 @@ public class Picture extends SimplePicture
     */
   public void edgeDetection(int edgeDist)
   {
+	
     Pixel leftPixel = null;
     Pixel rightPixel = null;
     Pixel[][] pixels = this.getPixels2D();
     Color rightColor = null;
-    for (int row = 0; row < pixels.length; row++)
+    for (int row = 0; row < pixels.length-1; row++)
     {
-      for (int col = 0; 
-           col < pixels[0].length-1; col++)
+      for (int col = 0; col < pixels[0].length-1; col++)
       {
+    	 
         leftPixel = pixels[row][col];
         rightPixel = pixels[row][col+1];
         rightColor = rightPixel.getColor();
-        if (leftPixel.colorDistance(rightColor) > 
-            edgeDist)
-          leftPixel.setColor(Color.BLACK);
+        if (leftPixel.colorDistance(rightColor) > edgeDist)
+        {
+        	leftPixel.setColor(Color.BLACK);
+        }
         else
-          leftPixel.setColor(Color.WHITE);
+        {
+        	leftPixel.setColor(Color.WHITE);
+        }
+          
       }
     }
+    
+  }
+  
+  
+  public void edgeHorizontal(int edgeDist)
+  {
+	  Pixel topPixel;
+	  Pixel bottomPixel;
+	  Color bottomColor = null;
+	  Pixel[][] pixels = this.getPixels2D();
+	  
+	  for (int row = 0; row < pixels.length-1; row++)
+	    {
+	      for (int col = 0; col < pixels[0].length-1; col++)
+	      {
+	    	  
+	    	  topPixel = pixels[row][col];
+	          bottomPixel = pixels[row + 1][col];
+	          bottomColor = bottomPixel.getColor();
+	          if (topPixel.colorDistance(bottomColor) > edgeDist)
+	          {
+	          	topPixel.setColor(Color.BLACK);
+	          }
+	          else
+	          {
+	          	topPixel.setColor(Color.WHITE);
+	          }
+	    	  
+	      }
+	    }
+	  
   }
   
   /**
@@ -566,6 +630,38 @@ public class Picture extends SimplePicture
     beach.zeroBlue();
     beach.explore();
   }
+
+public void createCollage2() 
+{
+	
+	Picture fellowship = new Picture("fellowship.jpg");
+	Picture bike = new Picture("bike.jpg");
+	
+	this.copy2(fellowship, 100, 0, 200, 200);
+	this.copy2(bike, 0, 0, 100, 100);
+	this.copy2(bike, 200, 0, 300, 300);
+	this.copy2(fellowship, 300, 0, 600, 600);
+	
+}
+
+public void turnPurple()
+{
+	 Pixel[][] pixels = this.getPixels2D();
+	    int width = pixels[0].length;
+	    for (int row = 0; row < pixels.length; row++)
+	    {
+	      for (int col = 0; col < width; col++)
+	      {
+	    	 int red = pixels[row][col].getRed();
+	    	 int blue = pixels[row][col].getBlue();
+	    	 int green = pixels[row][col].getGreen();
+	        if(red > 100 && blue > 100 && green > 100)
+	        {
+	        	pixels[row][col].setGreen(green - green);
+	        }
+	      }
+	    } 
+}
   
   
   

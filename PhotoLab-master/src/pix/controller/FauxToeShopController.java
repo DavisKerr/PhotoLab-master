@@ -6,6 +6,7 @@ public class FauxToeShopController
 {
 	
 	private FauxToeShopFrame baseFrame; 
+	private String[] filters;
 	
 	public FauxToeShopController()
 	{
@@ -16,4 +17,5 @@ public class FauxToeShopController
 	{
 		
 	}
+
 }

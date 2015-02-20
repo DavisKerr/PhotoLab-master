@@ -124,8 +124,11 @@ public class PictureTester
   public static void testEdgeDetection()
   {
     Picture swan = new Picture("swan.jpg");
+    Picture swan2 = new Picture("swan.jpg");
     swan.edgeDetection(10);
     swan.explore();
+    swan2.edgeHorizontal(10);
+    swan2.explore();
   }
   
   public static void testMirrorDiagonal()
@@ -167,7 +170,12 @@ public class PictureTester
   }
   public static void testCopy()
   {
-	  
+	  Picture canvas = new Picture("640x480.jpg");
+//	  Picture fellowship = new Picture("fellowship.jpg");
+//	  fellowship.copy2(fellowship, 10, 25, 100, 100);
+	  canvas.createCollage2();
+	  canvas.mirrorVertical();
+	  canvas.explore();
   }
   
   public static void testOrder()
@@ -177,12 +185,28 @@ public class PictureTester
 	  beach.order();
 	  beach.explore();
   }
+  public static void changeWhiteToPurple()
+  {
+	  Picture flower = new Picture("whiteFlower.jpg");
+	  flower.turnPurple();
+	  flower.explore();
+  }
+  private static void testChromakey() 
+  {
+		
+	  Picture beach = new Picture("beach.jpg");
+	  Picture green = new Picture("GreenScreen2.jpg");
+	  beach.chromakey(green);
+	  beach.explore();
+		
+  }
   
   /** Main method for testing.  Every class can have a main
     * method in Java */
   public static void main(String[] args)
   {
-	fiveAlgorithms();
+	//changeWhiteToPurple();
+	//fiveAlgorithms();
 	//testOrder(); 
     // uncomment a call here to run a test
     // and comment out the ones you don't want
@@ -202,10 +226,10 @@ public class PictureTester
     //testMirrorGull(); //done
     //testMirrorDiagonal(); //done
     //testCollage();
-    //testCopy(); //working on
+    //testCopy(); //done
     //testEdgeDetection(); //done
     //testEdgeDetection2();
-    //testChromakey();
+    testChromakey();
     //testEncodeAndDecode();
     //testGetCountRedOverValue(250);
     //testSetRedToHalfValueInTopHalf();
@@ -214,4 +238,6 @@ public class PictureTester
 	//testSepiaTone(); //done
 	//testRandomChange(); //done
   }
+
+
 }
